@@ -1,27 +1,180 @@
-# AngularEslint
+# Angular Eslint (Angular + Typescript + EsLint + Style Guide (airbnb) Prettier + Git Hook (husky))
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.1.
+Content
+- Angular Project Prepare
+  - Create New
+  - Clone Existing One
+- Eslint Prepare
+  - Eslint Configure
+  - Eslint lint check
+  - Eslint lint check, remove others
+  - Eslint UI
+  - Eslint / Typescript-eslint Rules use
+- Eslint Style Guide
+  - Default
+  - Airbnb
+  - Google
+  - Standard
+- EsLint with prettier
+- Git Hook
+  - husky
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Tools used in this project
+- nodejs
+- git
+- vscode
+- Angular - 13.1.1
+- Typescript - 
+- EsLint
+- Style Guide
+  - 
+  - airbnb
+  - google
+  - standard
+- Prettier
+- Git Hook
+  - husky
+  
+  
+## Angular Project Prepare
+- Install nodejs, vscode, git
+- update  npm
+- Install angular
 
-## Code scaffolding
+```
+node --version
+npm -v
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+npm install -g @angular/cli
+npm install npm@latest -g
 
-## Build
+```
+### Create new Angular Project
+```
+# create new angular project
+ng new AngularEslint
+cd AngularEslint
+npm install
+ng serve -o --port 3032
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+# init in git
+git init
+git remote add ...
+git add .
+git commit -m "message"
+git push
+```
 
-## Running unit tests
+### Cone existing Angular Project
+```
+git clone 
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Run your angular project
+```
+ng serve -o --port 3032
+```
 
-## Running end-to-end tests
+## Eslint
+- `eslint`: ESLint core library
+- `@typescript-eslint/parser`: parser that allows ESLint to understand TypeScript code
+- `@typescript-eslint/eslint-plugin`: plugin with a set of recommended TypeScript rules
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```
+npm install eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin --save-dev
+```
 
-## Further help
+### Configure EsLint
+#### Automatic
+```
+eslint --init 
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+#### Manualy
+- create a file `.eslintrc`
+
+```json
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "project": ["tsconfig.json"] ,
+    "sourceType": "module"
+  },
+  "rules": {
+    "@typescript-eslint/object-curly-spacing": ["error", "always"],
+    "@typescript-eslint/array-type": "error"
+  }
+}
+```
+- create a file `.eslintignore` for ignore linting
+```
+node_modules
+dist
+```
+
+- Add eslint command in `package.json`
+```json
+{
+  ...
+  "scripts": {
+    "ng": "ng",
+    ...
+    "lint": "eslint . --ext .ts",
+    "lint1": "eslint . --ext .js,.jsx,.ts,.tsx"
+  }
+}
+```
+
+- Run eslint
+```
+npm run lint
+```
+
+## Eslint Check, remove others
+- change vs code settings for typescript disable
+- go to settings & search `typescript validate` and uncheck it
+- or open the `settings.json` file and set the below options in `settings.json` file
+
+```json
+{
+  ...
+  "typescript.validate.enable" : false
+}
+```
+
+
+### Eslint / Typescript-eslint Rules use
+- add/modify rules in `.eslintrc` file
+```json
+{
+  ...
+  "rules": {
+    "@typescript-eslint/object-curly-spacing": ["error", "always"],
+    "@typescript-eslint/array-type": "error"
+  }
+}
+```
+
+### Eslint UI
+- Install EsLint vs code extention - [EsLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- after eslint command, you can see eslint context menu at hover in vscode
+
+
+- Eslint Style Guide
+  - Default
+  - Airbnb
+  - Google
+  - Standard
+
+- EsLint with prettier
+
+- Git Hook
+  - husky
