@@ -1,18 +1,89 @@
 {
+  "env": {
+    "browser": true,
+    "node": true
+  },
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": [
+    "@typescript-eslint",
+    "prettier"
+  ],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "prettier"
   ],
   "parserOptions": {
     "ecmaVersion": 2020,
-    "project": ["tsconfig.json"] ,
+    "project": [
+      "tsconfig.json"
+    ],
     "sourceType": "module"
   },
   "rules": {
-    "@typescript-eslint/object-curly-spacing": ["error", "always"],
-    "@typescript-eslint/array-type": "error"
-  }
+    // "prettier/prettier": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "parser": "flow"
+      }
+    ],
+    "no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "args": "all",
+        "caughtErrors": "none"
+      }
+    ],
+    "no-undefined": "error",
+    "no-unused-private-class-members": "error",
+    "init-declarations": [
+      "error",
+      "always"
+    ],
+    "@typescript-eslint/init-declarations": [
+      "error"
+    ],
+    "@typescript-eslint/object-curly-spacing": [
+      "error",
+      "always"
+    ],
+    "@typescript-eslint/array-type": "error",
+    "quotes": [
+      "error",
+      "single",
+      "avoid-escape"
+    ],
+    "indent": [
+      "error",
+      2
+    ],
+    "max-lines": [
+      "error",
+      {
+        "max": 200,
+        "skipBlankLines": true,
+        "skipComments": true
+      }
+    ]
+  },
+  "ignorePatterns": [
+    "src/*.ts",
+    "*.spec.ts"
+  ],
+  // "noInlineConfig": true,
+  "overrides": [
+    {
+      "files": [
+        "*-test.js",
+        "*.spec.js"
+      ],
+      "rules": {
+        "no-unused-expressions": "off"
+      }
+    }
+  ]
 }

@@ -169,13 +169,114 @@ npm run lint
 - after eslint command, you can see eslint context menu at hover in vscode
 
 
-- EsLint Style Guide
-  - Default
-  - Airbnb
-  - Google
-  - Standard
+## EsLint Style Guide
+### Default
+### Airbnb
+- install airbnb plugins
+```
+npm install eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-airbnb-base  eslint-plugin-import --save-dev
 
-- EsLint with prettier
+```
+
+- modify `.eslintrc` file
+```json
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "airbnb-base"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 13,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ],
+    "import/no-unresolved": "off",
+    "import/prefer-default-export": "off",
+    "class-methods-use-this": "off",
+    "lines-between-class-members": "off",
+    "padded-blocks": [
+      "error",
+      "always"
+    ],
+    "comma-dangle": ["error","never"],
+    "indent": ["error", 4]
+  }
+}
+```
+
+## EsLint with prettier
+- install prettier plugin for vs code
+- install prettier npm plugins
+```
+npm i eslint-config-prettier eslint-plugin-prettier prettier -D
+```
+
+- configure prettier for eslint in `.eslintrc`
+```json
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": "error",
+    ...
+  },
+  ...
+}
+
+```
+- create a file for prettier options `.prettierrc`
+```
+{
+  "printWidth": 80,
+  "tabWidth": 4,
+  "singleQuote": false,
+  "trailingComma": "none",
+  "bracketSpacing": true,
+  "semi": true,
+  "useTabs": false
+}
+```
+**note** after any changes in `.prettierrc` file you need to restart your vs code
+
+- you can change default formatter in vs code settings
+
+```
+# vs code default
+"[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+}
+
+# vs code prettier
+"editor.defaultFormatter": "esbenp.prettier-vscode",
+
+"[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
+"[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
+
+"editor.formatOnSave": true,
+```
+
+
 
 - Git Hook
   - husky
@@ -209,6 +310,22 @@ Occurred while linting C:\Projects\Documents\github\angular\AngularEslint\src\ap
 }
 ```
 
+- angular build
+```
+# problem
+error TS2564: Property 'title1' has no initializer and is not definitely assigned in the constructor.
+
+# solution
+tslint.json
+{
+  "compilerOptions": {
+   ...
+    "strictPropertyInitialization": false
+  }
+}
+
+```
+
 ## References
 - tools
   - [eslint](https://eslint.org/)
@@ -222,3 +339,6 @@ Occurred while linting C:\Projects\Documents\github\angular\AngularEslint\src\ap
     - [airbnb](https://github.com/airbnb/javascript)
     - [standardjs](https://standardjs.com/rules.html)
     - [google](https://google.github.io/styleguide/jsguide.html)
+
+
+
