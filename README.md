@@ -278,8 +278,21 @@ npm i eslint-config-prettier eslint-plugin-prettier prettier -D
 
 
 
-- Git Hook
-  - husky
+## Git Hook
+## husky
+```
+npm install husky --save-dev
+npx husky install
+npm set-script prepare "husky install"
+npx husky add .husky/pre-commit "npm run lint"
+
+
+git add .husky/pre-commit
+git add .
+
+# if lint failed then commit aborted
+git commit -m "husky added"
+```
 
 ## Problems / Solutions
 - git clone problem
