@@ -1,16 +1,16 @@
-# Angular Eslint (Angular + Typescript + EsLint + Style Guide (airbnb) Prettier + Git Hook (husky))
+# Angular EsLint (Angular + Typescript + EsLint + Style Guide (airbnb) Prettier + Git Hook (husky))
 
 Content
 - Angular Project Prepare
   - Create New
   - Clone Existing One
-- Eslint Prepare
-  - Eslint Configure
-  - Eslint lint check
-  - Eslint lint check, remove others
-  - Eslint UI
-  - Eslint / Typescript-eslint Rules use
-- Eslint Style Guide
+- EsLint Prepare
+  - EsLint Configure
+  - EsLint lint check
+  - EsLint lint check, remove others
+  - EsLint UI
+  - EsLint / Typescript-eslint Rules use
+- EsLint Style Guide
   - Default
   - Airbnb
   - Google
@@ -21,17 +21,18 @@ Content
 
 
 Tools used in this project
-- nodejs
-- git
-- vscode
-- Angular - 13.1.1
-- Typescript - 
-- EsLint
+- [nodejs](https://nodejs.org/en/download/)
+- [git](https://git-scm.com/)
+- [vscode](https://code.visualstudio.com/)
+- [Angular - 13.1.1](https://angular.io/guide/setup-local)
+- [Typescript - ](https://www.typescriptlang.org/)
+- [EsLint](https://eslint.org/)
+- [Typescript EsLint](https://github.com/typescript-eslint/typescript-eslint)
 - Style Guide
-  - 
-  - airbnb
-  - google
-  - standard
+  - [default](https://eslint.org/docs/rules/)
+  - [airbnb](https://www.npmjs.com/package/eslint-config-airbnb)
+  - [google](https://www.npmjs.com/package/eslint-config-google)
+  - [standard](https://www.npmjs.com/package/eslint-config-standard)
 - Prettier
 - Git Hook
   - husky
@@ -66,7 +67,7 @@ git commit -m "message"
 git push
 ```
 
-### Cone existing Angular Project
+### Clone existing Angular Project
 ```
 git clone 
 ```
@@ -76,7 +77,7 @@ git clone
 ng serve -o --port 3032
 ```
 
-## Eslint
+## EsLint
 - `eslint`: ESLint core library
 - `@typescript-eslint/parser`: parser that allows ESLint to understand TypeScript code
 - `@typescript-eslint/eslint-plugin`: plugin with a set of recommended TypeScript rules
@@ -138,7 +139,7 @@ dist
 npm run lint
 ```
 
-## Eslint Check, remove others
+## EsLint Check, remove others
 - change vs code settings for typescript disable
 - go to settings & search `typescript validate` and uncheck it
 - or open the `settings.json` file and set the below options in `settings.json` file
@@ -151,7 +152,7 @@ npm run lint
 ```
 
 
-### Eslint / Typescript-eslint Rules use
+### EsLint / Typescript-eslint Rules use
 - add/modify rules in `.eslintrc` file
 ```json
 {
@@ -163,12 +164,12 @@ npm run lint
 }
 ```
 
-### Eslint UI
+### EsLint UI
 - Install EsLint vs code extention - [EsLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - after eslint command, you can see eslint context menu at hover in vscode
 
 
-- Eslint Style Guide
+- EsLint Style Guide
   - Default
   - Airbnb
   - Google
@@ -178,3 +179,46 @@ npm run lint
 
 - Git Hook
   - husky
+
+## Problems / Solutions
+- git clone problem
+```
+# problem
+error: RPC failed; curl 92 HTTP/2 stream 0 was not closed cleanly: Unknown error code (err 8)
+
+# solution
+git config --global http.postBuffer 157286400
+```
+
+- eslint configure problem
+```
+# problem
+error: Error while loading rule '@typescript-eslint/await-thenable': You have used a rule which requires parserServices to be generated. You must therefore provide a value for the "parserOptions.project" property for @typescript-eslint/parser.
+Occurred while linting C:\Projects\Documents\github\angular\AngularEslint\src\app\app-routing.module.ts
+
+#solution
+.eslintrc
+{
+	...
+	
+	"parserOptions": {
+		"ecmaVersion": 2020,
+		"project": ["tsconfig.json"] ,
+		"sourceType": "module"
+	}
+}
+```
+
+## References
+- tools
+  - [eslint](https://eslint.org/)
+  - [typescript-eslint](https://typescript-eslint.io/)
+  - [prettier](https://prettier.io/)
+  - [husky](https://github.com/typicode/husky)
+- Style Guide
+  - npm
+  - Rules
+    - [default](https://eslint.org/docs/rules/)
+    - [airbnb](https://github.com/airbnb/javascript)
+    - [standardjs](https://standardjs.com/rules.html)
+    - [google](https://google.github.io/styleguide/jsguide.html)
