@@ -180,6 +180,101 @@ npm run lint
 - Git Hook
   - husky
 
+## Add Angular Eslint
+- install vs code extention - EsLint, Prettier
+- typescript should be <4.5.0
+- install plugins 
+```
+ng add @angular-eslint/schematics
+
+# before angular 12
+ng g @angular-eslint/schematics:convert-tslint-to-eslint --remove-tslint-if-no-more-tslint-targets --ignore-existing-tslint-config
+
+ng add eslint @typescript-eslint
+pm install prettier eslint-config-prettier eslint-plugin-prettier --save-dev
+```
+
+- `.eslintrc` file shoule be
+```
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "eslint:recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "plugin:prettier/recommended"
+      ],
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "prettier/prettier": [
+          "error",
+          {
+            "singleQuote": true,
+            "parser": "flow",
+            "endOfLine": "auto"
+          }
+        ],
+        "@typescript-eslint/no-unused-vars": [
+          "error"
+        ],
+        "@typescript-eslint/object-curly-spacing": [
+          "error",
+          "always"
+        ],
+        "@typescript-eslint/array-type": "error",
+        "quotes": [
+          "error",
+          "single",
+          "avoid-escape"
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    }
+  ]
+}
+```
+
+- run `npx ng lint`
+
 ## Problems / Solutions
 - git clone problem
 ```
@@ -222,3 +317,6 @@ Occurred while linting C:\Projects\Documents\github\angular\AngularEslint\src\ap
     - [airbnb](https://github.com/airbnb/javascript)
     - [standardjs](https://standardjs.com/rules.html)
     - [google](https://google.github.io/styleguide/jsguide.html)
+
+- [Angular EsLint](https://github.com/angular-eslint/angular-eslint)
+- [Angular Eslint Tutorial](https://dev.to/gsarciotto/migrating-and-configuring-eslint-with-angular-11-3fg1)
